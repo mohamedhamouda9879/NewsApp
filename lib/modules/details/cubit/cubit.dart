@@ -92,7 +92,7 @@ class NewsDetailsCubit extends Cubit<NewsDetailsStates> {
   }
 
   IconData sufix = Icons.favorite_border;
-  bool isFav = true;
+  bool isFav = false;
 
   void changeFavVisibility() {
     print("isPasswordShowen : $isFav");

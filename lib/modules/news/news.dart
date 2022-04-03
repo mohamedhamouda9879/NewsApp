@@ -1,6 +1,7 @@
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/models/news/newsmodel.dart';
 import 'package:youngeyes/modules/details/cubit/cubit.dart';
 import 'package:youngeyes/modules/details/details.dart';
@@ -8,6 +9,7 @@ import 'package:youngeyes/modules/news/cubit/cubit.dart';
 import 'package:youngeyes/modules/news/cubit/states.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
+import 'package:youngeyes/shared/styles/colors.dart';
 
 class NewsScreen extends StatelessWidget {
   String catName;
@@ -57,7 +59,19 @@ class NewsScreen extends StatelessWidget {
                   },
                   itemCount: NewsCubit.get(context).allNews!.post!.length),
               fallback: (context) => Center(
-                child: CircularProgressIndicator(),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: defaultColor,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                  ),
+                ),
               ),
             ),
           ));

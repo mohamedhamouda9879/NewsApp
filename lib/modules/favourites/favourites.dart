@@ -1,11 +1,13 @@
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/modules/details/details.dart';
 import 'package:youngeyes/modules/favourites/cubit/cubit.dart';
 import 'package:youngeyes/modules/favourites/cubit/states.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
+import 'package:youngeyes/shared/styles/colors.dart';
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({Key? key}) : super(key: key);
@@ -57,7 +59,19 @@ class FavouritesScreen extends StatelessWidget {
                       .favourites!
                       .length),
               fallback: (context) => Center(
-                child: CircularProgressIndicator(),
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: defaultColor,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                  ),
+                ),
               ),
             ),
           ));

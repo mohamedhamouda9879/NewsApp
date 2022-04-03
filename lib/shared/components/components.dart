@@ -1,9 +1,12 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/models/allfav/all.dart';
 import 'package:youngeyes/models/news/newsmodel.dart';
+import 'package:youngeyes/shared/styles/colors.dart';
 
 Widget defaultButton({
   double width = double.infinity,
@@ -27,23 +30,45 @@ Widget defaultButton({
           borderRadius: BorderRadius.circular(radius), color: background),
     );
 
-Widget CommentItem(String comment, BuildContext context) => Card(
+Widget CommentItem(String comment, BuildContext context, String name) => Card(
       elevation: 3.0,
       shadowColor: Colors.blueGrey,
       margin: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: Colors.white)),
-      child: Container(
-        padding: EdgeInsets.all(6.0),
-        alignment: Alignment.topLeft,
-        child: Text(
-          comment,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2!
-              .copyWith(color: Colors.black),
-        ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.all(6.0),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  name,
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.all(6.0),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  comment,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
 
@@ -66,19 +91,54 @@ Widget NewsItem(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                FadeInImage(
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: CachedNetworkImage(
                     height: 200,
-                    placeholder: AssetImage('assets/images/placeholder.png'),
-                    image: NetworkImage(
-                        'https://whitecompressor.com/storage/${allNews.post?[index].image}')),
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://whitecompressor.com/storage/${allNews.post?[index].image}',
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: defaultColor,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey,
+                            highlightColor: defaultColor,
+                            child: Image.asset('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+                // FadeInImage(
+                //     height: 200,
+                //     placeholder: AssetImage('assets/images/placeholder.png'),
+                //     image: NetworkImage(
+                //         'https://whitecompressor.com/storage/${allNews.post?[index].image}')),
                 SizedBox(
                   height: 4,
                 ),
-                Text(
-                  '${allNews.post?[index].title}',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                Container(
+                  height: 40,
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      FadeAnimatedText('${allNews.post?[index].title}',
+                          textStyle: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis)),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 6,
@@ -128,11 +188,39 @@ Widget NewsItemFav(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                FadeInImage(
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: CachedNetworkImage(
                     height: 200,
-                    placeholder: AssetImage('assets/images/placeholder.png'),
-                    image: NetworkImage(
-                        'https://whitecompressor.com/storage/${getAllFavouriteModel.favourites?[index].post?.image.toString()}')),
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://whitecompressor.com/storage/${getAllFavouriteModel.favourites?[index].post?.image.toString()}',
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: defaultColor,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey,
+                            highlightColor: defaultColor,
+                            child: Image.asset('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+                // FadeInImage(
+                //     height: 200,
+                //     placeholder: AssetImage('assets/images/placeholder.png'),
+                //     image: NetworkImage(
+                //         'https://whitecompressor.com/storage/${getAllFavouriteModel.favourites?[index].post?.image.toString()}')),
                 SizedBox(
                   height: 4,
                 ),
@@ -239,9 +327,24 @@ Widget CategoryItem(BuildContext context, double width, double height,
               child: CachedNetworkImage(
                 width: width,
                 height: height,
+                fit: BoxFit.cover,
                 imageUrl: 'https://whitecompressor.com/storage/${image}',
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(value: downloadProgress.progress),
+                    Center(
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: defaultColor,
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey,
+                        highlightColor: defaultColor,
+                        child: Image.asset('assets/images/logo.png'),
+                      ),
+                    ),
+                  ),
+                ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -249,8 +352,6 @@ Widget CategoryItem(BuildContext context, double width, double height,
               margin: EdgeInsets.all(4.0),
               alignment: Alignment.bottomRight,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),

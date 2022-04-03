@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/modules/category/cubit/cubit.dart';
 import 'package:youngeyes/modules/category/cubit/states.dart';
 import 'package:youngeyes/modules/news/news.dart';
 import 'package:youngeyes/shared/components/components.dart';
+import 'package:youngeyes/shared/styles/colors.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -50,7 +52,21 @@ class CategoriesScreen extends StatelessWidget {
                   },
                 ),
               ),
-              fallback: (context) => Center(child: CircularProgressIndicator()),
+              fallback: (context) => Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: defaultColor,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                  ),
+                ),
+              ),
             ),
           );
         },

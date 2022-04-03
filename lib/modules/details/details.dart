@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:youngeyes/modules/details/cubit/cubit.dart';
 import 'package:youngeyes/modules/details/cubit/states.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
+import 'package:youngeyes/shared/styles/colors.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   String? newId;
@@ -27,89 +29,143 @@ class NewsDetailsScreen extends StatelessWidget {
           print(
               'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}');
           if (state is NewsDetailsSuccessState || state is AddFavSuccessState) {
-            return Scaffold(
-              resizeToAvoidBottomInset: true,
-              floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.comment),
-                onPressed: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (builder) {
-                        return ModalBottomSheet();
-                      });
-                },
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 20.0, horizontal: 8.0),
-                        child: NewsDetailsCubit.get(context)
-                                    .newsDetailsModel
-                                    ?.image
-                                    .toString() !=
-                                null
-                            ? Image.network(
-                                'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
-                              )
-                            : Image.asset('assets/images/placeholder.png'),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          print('hamouda bos ${NEWSID}');
-                          print('hamouda bos user rkmo ${USERID}');
-                          NewsDetailsCubit.get(context).addFav(NEWSID, USERID!);
-                          NewsDetailsCubit.get(context).changeFavVisibility();
-                        },
-                        child: CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            child: Icon(
-                              NewsDetailsCubit.get(context).sufix,
-                              color: Colors.white,
+            return SafeArea(
+              child: Scaffold(
+                resizeToAvoidBottomInset: true,
+                floatingActionButton: FloatingActionButton(
+                  child: Icon(Icons.comment),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (builder) {
+                          return ModalBottomSheet();
+                        });
+                  },
+                ),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Card(
+                          elevation: 12.0,
+                          child: Container(
+                            height: 300,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 20.0, horizontal: 8.0),
+                            child: NewsDetailsCubit.get(context)
+                                        .newsDetailsModel
+                                        ?.image
+                                        .toString() !=
+                                    null
+                                ? Container(
+                                    padding: const EdgeInsets.all(3.0),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: CachedNetworkImage(
+                                      height: 180,
+                                      fit: BoxFit.cover,
+                                      imageUrl:
+                                          'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Center(
+                                        child: Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Shimmer.fromColors(
+                                            baseColor: Colors.grey,
+                                            highlightColor: defaultColor,
+                                            child: Shimmer.fromColors(
+                                              baseColor: Colors.grey,
+                                              highlightColor: defaultColor,
+                                              child: Image.asset(
+                                                  'assets/images/logo.png'),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
+                                    ),
+                                  )
+                                // ? Image.network(
+                                //     'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
+                                //   )
+                                : Image.asset('assets/images/placeholder.png'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            print('hamouda bos ${NEWSID}');
+                            print('hamouda bos user rkmo ${USERID}');
+                            NewsDetailsCubit.get(context)
+                                .addFav(NEWSID, USERID!);
+                            NewsDetailsCubit.get(context).changeFavVisibility();
+                          },
+                          child: CircleAvatar(
+                              backgroundColor: Colors.blue,
+                              child: Icon(
+                                NewsDetailsCubit.get(context).sufix,
+                                color: Colors.white,
+                              )),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                            margin: EdgeInsets.fromLTRB(12, 0, 12, 0),
+                            child: Text(
+                              NewsDetailsCubit.get(context)
+                                  .newsDetailsModel!
+                                  .title
+                                  .toString(),
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
                             )),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          margin: EdgeInsets.fromLTRB(12, 0, 12, 0),
-                          child: Text(
-                            NewsDetailsCubit.get(context)
-                                .newsDetailsModel!
-                                .title
-                                .toString(),
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          margin: EdgeInsets.all(12.0),
-                          padding: EdgeInsets.all(6.0),
-                          child: Text(
-                            NewsDetailsCubit.get(context)
-                                .newsDetailsModel!
-                                .content
-                                .toString(),
-                            style: Theme.of(context).textTheme.bodyText2,
-                            textAlign: TextAlign.end,
-                          )),
-                    ],
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(12.0),
+                            padding: EdgeInsets.all(6.0),
+                            child: Text(
+                              NewsDetailsCubit.get(context)
+                                  .newsDetailsModel!
+                                  .content
+                                  .toString(),
+                              style: Theme.of(context).textTheme.bodyText2,
+                              textAlign: TextAlign.end,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ),
             );
           } else {
-            return Scaffold();
+            return Scaffold(
+              body: Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey,
+                      highlightColor: defaultColor,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                  ),
+                ),
+              ),
+            );
           }
         },
       ),
@@ -202,7 +258,13 @@ class ModalBottomSheet extends StatelessWidget {
                                               .resultUser![index]
                                               .content
                                               .toString(),
-                                          context),
+                                          context,
+                                          NewsDetailsCubit.get(context)
+                                              .getCommentsModel!
+                                              .resultUser![index]
+                                              .user!
+                                              .email
+                                              .toString()),
                                     ),
                                   ),
                                 );
@@ -232,9 +294,20 @@ class ModalBottomSheet extends StatelessWidget {
             );
           } else {
             return Center(
-                child: Container(
-              child: Text('dsdssdds'),
-            ));
+              child: Container(
+                height: 100,
+                width: 100,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey,
+                  highlightColor: defaultColor,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
+                ),
+              ),
+            );
           }
         },
       ),

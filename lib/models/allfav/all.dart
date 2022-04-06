@@ -7,7 +7,7 @@ class GetAllFavouriteModel {
     if (json['Favourites'] != null) {
       favourites = <Favourites>[];
       json['Favourites'].forEach((v) {
-        favourites!.add(new Favourites.fromJson(v));
+        favourites!.add(Favourites.fromJson(v));
       });
     }
   }
@@ -43,8 +43,8 @@ class Favourites {
     rememberToken = json['remember_token'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    post = json['post'] != null ? new Post.fromJson(json['post']) : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    post = json['post'] != null ? Post.fromJson(json['post']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 }
 

@@ -5,7 +5,6 @@ import 'package:youngeyes/layouts/cubit/cubit.dart';
 import 'package:youngeyes/layouts/cubit/states.dart';
 import 'package:youngeyes/modules/category/cubit/cubit.dart';
 import 'package:youngeyes/modules/profile/cubit/cubit.dart';
-import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
@@ -35,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             bottomNavigationBar: CurvedNavigationBar(
               backgroundColor: defaultColor,
               index: cubit.currentIndex,
-              items: <Widget>[
+              items: const <Widget>[
                 Icon(
                   Icons.home,
                   size: 30,

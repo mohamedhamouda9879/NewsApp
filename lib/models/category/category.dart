@@ -29,7 +29,7 @@ class CategoryModel {
     if (json['post'] != null) {
       post = <Post>[];
       json['post'].forEach((v) {
-        post!.add(new Post.fromJson(v));
+        post!.add(Post.fromJson(v));
       });
     }
   }
@@ -69,7 +69,7 @@ class Post {
     if (json['comments'] != null) {
       comments = <Comments>[];
       json['comments'].forEach((v) {
-        comments!.add(new Comments.fromJson(v));
+        comments!.add(Comments.fromJson(v));
       });
     }
   }

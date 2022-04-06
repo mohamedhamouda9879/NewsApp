@@ -7,13 +7,13 @@ class GetCommentsModel {
     if (json['Comments'] != null) {
       resultUser = <ResultUser>[];
       json['Comments'].forEach((v) {
-        resultUser!.add(new ResultUser.fromJson(v));
+        resultUser!.add(ResultUser.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.resultUser != null) {
       data['Comments'] = this.resultUser!.map((v) => v.toJson()).toList();
     }
@@ -49,11 +49,11 @@ class ResultUser {
     rememberToken = json['remember_token'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['content'] = this.content;
     data['post_id'] = this.postId;
@@ -94,7 +94,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['email'] = this.email;
     data['email_verified_at'] = this.emailVerifiedAt;

@@ -1,4 +1,4 @@
-package com.example.youngeyes
+package com.enterprise.youngeyes
 
 import io.flutter.embedding.android.FlutterActivity
 

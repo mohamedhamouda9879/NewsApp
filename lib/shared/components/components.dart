@@ -224,6 +224,21 @@ Widget NewsItemFav(
                 SizedBox(
                   height: 4,
                 ),
+                // Container(
+                //   height: 40,
+                //   child: AnimatedTextKit(
+                //     repeatForever: true,
+                //     totalRepeatCount: 3,
+                //     animatedTexts: [
+                //       FadeAnimatedText(
+                //           '${getAllFavouriteModel.favourites?[index].post?.title.toString()}',
+                //           textStyle: TextStyle(
+                //               fontSize: 18.0,
+                //               fontWeight: FontWeight.bold,
+                //               overflow: TextOverflow.ellipsis)),
+                //     ],
+                //   ),
+                // ),
                 Text(
                   '${getAllFavouriteModel.favourites?[index].post?.title.toString()}',
                   maxLines: 1,
@@ -233,15 +248,31 @@ Widget NewsItemFav(
                 SizedBox(
                   height: 6,
                 ),
-                Text(
-                  '${getAllFavouriteModel.favourites?[index].post?.content.toString()}',
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      ?.copyWith(color: Colors.black),
+                Container(
+                  height: 40,
+                  margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    stopPauseOnTap: true,
+                    animatedTexts: [
+                      FadeAnimatedText(
+                          '${getAllFavouriteModel.favourites?[index].post?.content.toString()}',
+                          textStyle: TextStyle(
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.normal,
+                              overflow: TextOverflow.ellipsis)),
+                    ],
+                  ),
                 ),
+                // Text(
+                //   '${getAllFavouriteModel.favourites?[index].post?.content.toString()}',
+                //   maxLines: 3,
+                //   overflow: TextOverflow.ellipsis,
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .bodyText2
+                //       ?.copyWith(color: Colors.black),
+                // ),
                 Container(
                   alignment: Alignment.bottomRight,
                   child: Text(

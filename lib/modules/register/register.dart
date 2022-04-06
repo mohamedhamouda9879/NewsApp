@@ -27,10 +27,12 @@ class RegisterScreen extends StatelessWidget {
             if (state.loginModel.token != null) {
               print(state.loginModel.token);
               print(state.loginModel.toString());
+              CacheHelper.saveData(
+                  key: 'UserID', value: state.loginModel.user!.id.toString());
               CacheHelper.saveData(key: 'token', value: state.loginModel.token)
                   .then((value) {
                 TOKEN = state.loginModel.token.toString();
-                USERID = state.loginModel.user!.id.toString();
+                // USERID = state.loginModel.user!.id.toString();
                 NavigateAndFinish(context, HomeScreen());
               });
               showToast(

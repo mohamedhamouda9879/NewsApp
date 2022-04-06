@@ -17,6 +17,7 @@ void printFullText(String text) {
 }
 
 String? TOKEN = '';
+
 String NEWSID = '';
 String? USERID = '';
 

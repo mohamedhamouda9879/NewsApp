@@ -15,11 +15,11 @@ class FavouriteModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['is_in_favorite'] = this.isInFavorite;
-    data['post_id'] = this.postId;
-    data['favorite_id'] = this.favoriteId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['is_in_favorite'] = isInFavorite;
+    data['post_id'] = postId;
+    data['favorite_id'] = favoriteId;
     return data;
   }
 }

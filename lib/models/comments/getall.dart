@@ -13,9 +13,9 @@ class GetCommentsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.resultUser != null) {
-      data['Comments'] = this.resultUser!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (resultUser != null) {
+      data['Comments'] = resultUser!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -26,7 +26,7 @@ class ResultUser {
   String? content;
   String? postId;
   String? userId;
-  Null? rememberToken;
+  String? rememberToken;
   String? createdAt;
   String? updatedAt;
   User? user;
@@ -53,16 +53,16 @@ class ResultUser {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['content'] = this.content;
-    data['post_id'] = this.postId;
-    data['user_id'] = this.userId;
-    data['remember_token'] = this.rememberToken;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['content'] = content;
+    data['post_id'] = postId;
+    data['user_id'] = userId;
+    data['remember_token'] = rememberToken;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -71,7 +71,7 @@ class ResultUser {
 class User {
   int? id;
   String? email;
-  Null? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? passwordConfirmation;
   String? createdAt;
   String? updatedAt;
@@ -94,13 +94,13 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['email_verified_at'] = this.emailVerifiedAt;
-    data['password_confirmation'] = this.passwordConfirmation;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['email'] = email;
+    data['email_verified_at'] = emailVerifiedAt;
+    data['password_confirmation'] = passwordConfirmation;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

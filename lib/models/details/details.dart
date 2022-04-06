@@ -36,18 +36,17 @@ class NewsDetailsModel {
     if (json['comments'] != null) {
       comments = <Comments>[];
       json['comments'].forEach((v) {
-        comments!.add(new Comments.fromJson(v));
+        comments!.add(Comments.fromJson(v));
       });
     }
     if (json['favourites'] != null) {
       favourites = <Favourites>[];
       json['favourites'].forEach((v) {
-        favourites!.add(new Favourites.fromJson(v));
+        favourites!.add(Favourites.fromJson(v));
       });
     }
-    catagery = json['catagery'] != null
-        ? new Catagery.fromJson(json['catagery'])
-        : null;
+    catagery =
+        json['catagery'] != null ? Catagery.fromJson(json['catagery']) : null;
   }
 }
 
@@ -79,7 +78,7 @@ class Comments {
     rememberToken = json['remember_token'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 }
 

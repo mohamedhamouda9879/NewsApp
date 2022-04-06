@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/layouts/home.dart';
@@ -9,7 +11,6 @@ import '../../../shared/components/components.dart';
 
 class NewsLoginCubit extends Cubit<NewsLoginStates> {
   NewsLoginCubit() : super(NewsLoginInitialStates());
-
 
   static NewsLoginCubit get(context) => BlocProvider.of(context);
   LoginModel? NewsLoginModel;
@@ -28,21 +29,19 @@ class NewsLoginCubit extends Cubit<NewsLoginStates> {
       NewsLoginModel = LoginModel.fromJson(value.data);
       print(value.toString());
       print('hamouda login y basha ');
-  
-  if(NewsLoginModel!.token!=null){        NavigateAndFinish(context, HomeScreen());
-        emit(NewsLoginSucessStates(NewsLoginModel!));}else{
-           showToast(message: "Wrong Login", toastStates: ToastStates.EROOR);
-          emit(NewsLoginErrorStates('error'));
-        }
 
-     
+      if (NewsLoginModel!.token != null) {
+        NavigateAndFinish(context, const HomeScreen());
+        emit(NewsLoginSucessStates(NewsLoginModel!));
+      } else {
+        showToast(message: "Wrong Login", toastStates: ToastStates.EROOR);
+        emit(NewsLoginErrorStates('error'));
+      }
     }).catchError((error) {
-      showToast(message: "${error.toString()}", toastStates: ToastStates.EROOR);
+      showToast(message: error.toString(), toastStates: ToastStates.EROOR);
       emit(NewsLoginErrorStates(error.toString()));
     });
   }
-
-  
 
   IconData sufix = Icons.visibility_outlined;
   bool isPasswordShowen = true;

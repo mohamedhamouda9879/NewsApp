@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/layouts/home.dart';
@@ -32,7 +34,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;
-  MyApp(this.startWidget);
+  const MyApp(this.startWidget);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

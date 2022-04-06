@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -13,32 +14,27 @@ class CacheHelper {
     return await sharedPreferences.setBool(key, value);
   }
 
-  static bool? getBool(
-      {required String key})  {
-    return  sharedPreferences.getBool(key);
+  static bool? getBool({required String key}) {
+    return sharedPreferences.getBool(key);
   }
 
-
-  static Future<bool> RemoveData(
-      {required String key}) async {
-      return await sharedPreferences.remove(key);
+  static Future<bool> RemoveData({required String key}) async {
+    return await sharedPreferences.remove(key);
   }
 
-  static dynamic getData(
-      {required String key})  {
-    return  sharedPreferences.get(key);
+  static dynamic getData({required String key}) {
+    return sharedPreferences.get(key);
   }
 
   static Future<bool> saveData(
-      {required String key,required dynamic value}
-      )async{
-    if(value is String){
+      {required String key, required dynamic value}) async {
+    if (value is String) {
       return await sharedPreferences.setString(key, value);
     }
-    if(value is int){
+    if (value is int) {
       return await sharedPreferences.setInt(key, value);
     }
-    if(value is bool){
+    if (value is bool) {
       return await sharedPreferences.setBool(key, value);
     }
     return await sharedPreferences.setDouble(key, value);

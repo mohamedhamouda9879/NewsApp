@@ -33,7 +33,7 @@ class FavouritesScreen extends StatelessWidget {
                         context: context,
                         index: index,
                         function: () async {
-                          NEWSID = await GetAllFavCubit.get(context)
+                          NEWSID = GetAllFavCubit.get(context)
                               .getAllFavouriteModel!
                               .favourites![index]
                               .postId
@@ -41,12 +41,11 @@ class FavouritesScreen extends StatelessWidget {
 
                           NavigateTo(
                               context,
-                              await NewsDetailsScreen(
-                                  GetAllFavCubit.get(context)
-                                      .getAllFavouriteModel!
-                                      .favourites![index]
-                                      .postId
-                                      .toString()));
+                              NewsDetailsScreen(GetAllFavCubit.get(context)
+                                  .getAllFavouriteModel!
+                                  .favourites![index]
+                                  .postId
+                                  .toString()));
                         });
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -59,7 +58,7 @@ class FavouritesScreen extends StatelessWidget {
                       .favourites!
                       .length),
               fallback: (context) => Center(
-                child: Container(
+                child: SizedBox(
                   height: 100,
                   width: 100,
                   child: Shimmer.fromColors(

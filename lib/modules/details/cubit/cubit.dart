@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/models/check/check.dart';
@@ -22,7 +23,7 @@ class NewsDetailsCubit extends Cubit<NewsDetailsStates> {
 
   void getNewsDetails(String id) async {
     emit(NewsDetailsLoadingState());
-    await DioHelper.getData(Url: 'posts/${id}').then((value) {
+    await DioHelper.getData(Url: 'posts/$id').then((value) {
       newsDetailsModel = NewsDetailsModel.fromJson(value.data);
       print('hamouda${newsDetailsModel!.image.toString()}');
       emit(NewsDetailsSuccessState());
@@ -34,7 +35,7 @@ class NewsDetailsCubit extends Cubit<NewsDetailsStates> {
 
   Future getComments(String id) async {
     emit(CommentsLoadingState());
-    await DioHelper.getData(Url: 'search/${id}').then((value) {
+    await DioHelper.getData(Url: 'search/$id').then((value) {
       getCommentsModel = GetCommentsModel.fromJson(value.data);
       // print('hamouda${getCommentsModel!.resultUser![22].content}');
 

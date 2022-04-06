@@ -29,22 +29,22 @@ class AllNews {
     if (json['post'] != null) {
       post = <Post>[];
       json['post'].forEach((v) {
-        post!.add(new Post.fromJson(v));
+        post!.add(Post.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['Artitle'] = this.artitle;
-    data['Entitle'] = this.entitle;
-    data['image'] = this.image;
-    data['remember_token'] = this.rememberToken;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.post != null) {
-      data['post'] = this.post!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['Artitle'] = artitle;
+    data['Entitle'] = entitle;
+    data['image'] = image;
+    data['remember_token'] = rememberToken;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (post != null) {
+      data['post'] = post!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -84,23 +84,23 @@ class Post {
     if (json['comments'] != null) {
       comments = <Comments>[];
       json['comments'].forEach((v) {
-        comments!.add(new Comments.fromJson(v));
+        comments!.add(Comments.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['content'] = this.content;
-    data['image'] = this.image;
-    data['category_id'] = this.categoryId;
-    data['remember_token'] = this.rememberToken;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.comments != null) {
-      data['comments'] = this.comments!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['content'] = content;
+    data['image'] = image;
+    data['category_id'] = categoryId;
+    data['remember_token'] = rememberToken;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -111,7 +111,7 @@ class Comments {
   String? content;
   String? postId;
   String? userId;
-  Null? rememberToken;
+  String? rememberToken;
   String? createdAt;
   String? updatedAt;
 
@@ -135,14 +135,14 @@ class Comments {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['content'] = this.content;
-    data['post_id'] = this.postId;
-    data['user_id'] = this.userId;
-    data['remember_token'] = this.rememberToken;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['content'] = content;
+    data['post_id'] = postId;
+    data['user_id'] = userId;
+    data['remember_token'] = rememberToken;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'colors.dart';
 
-ThemeData darkTheme=ThemeData(
-
-  primarySwatch:defaultColor,
-  textTheme: TextTheme(
+ThemeData darkTheme = ThemeData(
+  primarySwatch: defaultColor,
+  textTheme: const TextTheme(
       bodyText1: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
-      )),
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  )),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: defaultColor,
@@ -22,33 +20,29 @@ ThemeData darkTheme=ThemeData(
       backgroundColor: HexColor('333739')),
   scaffoldBackgroundColor: HexColor('333739'),
   appBarTheme: AppBarTheme(
-
       titleSpacing: 20.0,
-      backwardsCompatibility: false,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: HexColor('333739'),
         statusBarIconBrightness: Brightness.light,
       ),
       backgroundColor: HexColor('333739'),
       elevation: 0.0,
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: Colors.white,
       ),
-      titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold)),
+      titleTextStyle: const TextStyle(
+          color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
 );
 
-ThemeData lightTheme=ThemeData(
-    textTheme: TextTheme(
+ThemeData lightTheme = ThemeData(
+    textTheme: const TextTheme(
         bodyText1: TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
-        )),
+      fontSize: 18.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+    )),
     primarySwatch: defaultColor,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.deepOrange,
       unselectedItemColor: Colors.grey,
@@ -56,9 +50,8 @@ ThemeData lightTheme=ThemeData(
       backgroundColor: Colors.white,
     ),
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
         titleSpacing: 20.0,
-        backwardsCompatibility: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.white,
           statusBarIconBrightness: Brightness.dark,
@@ -69,6 +62,4 @@ ThemeData lightTheme=ThemeData(
           color: Colors.black,
         ),
         titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold)));
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)));

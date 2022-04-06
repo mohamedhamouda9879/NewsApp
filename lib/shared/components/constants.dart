@@ -1,4 +1,5 @@
-import 'package:youngeyes/layouts/home.dart';
+// ignore_for_file: non_constant_identifier_names, avoid_print
+
 import 'package:youngeyes/modules/login/login.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/network/local/cache_helper.dart';

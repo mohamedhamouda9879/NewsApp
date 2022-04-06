@@ -1,4 +1,5 @@
-import 'package:bloc/bloc.dart';
+// ignore_for_file: avoid_print
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/models/allfav/all.dart';
 import 'package:youngeyes/modules/favourites/cubit/states.dart';
@@ -14,7 +15,7 @@ class GetAllFavCubit extends Cubit<GetAllFavStates> {
   void getAllFav(String id) async {
     emit(GetAllFavLoadingState());
 
-    await DioHelper.getData(Url: 'fav/${id}').then((value) {
+    await DioHelper.getData(Url: 'fav/$id').then((value) {
       getAllFavouriteModel = GetAllFavouriteModel.fromJson(value.data);
       emit(GetAllFavSuccessState());
     }).catchError((error) {

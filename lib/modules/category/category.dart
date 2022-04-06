@@ -1,6 +1,5 @@
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shimmer/shimmer.dart';
@@ -53,7 +52,7 @@ class CategoriesScreen extends StatelessWidget {
                 ),
               ),
               fallback: (context) => Center(
-                child: Container(
+                child: SizedBox(
                   height: 100,
                   width: 100,
                   child: Shimmer.fromColors(

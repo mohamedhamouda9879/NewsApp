@@ -10,12 +10,11 @@ class ProfileCubit extends Cubit<ProfileStates> {
 
   ProfileModel? profileModel;
   void getProfile(String id) {
-    DioHelper.getData(Url: 'users/${id}').then((value) {
+    DioHelper.getData(Url: 'users/$id').then((value) {
       profileModel = ProfileModel.fromJson(value.data);
       emit(ProfileSuccessState());
     }).catchError((error) {
       emit(ProfileErrorState(error));
     });
-    ;
   }
 }

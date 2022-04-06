@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names, must_be_immutable
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,8 @@ class LoginScreen extends StatelessWidget {
   var EmailController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   .then((value) {
                 TOKEN = state.NewsLoginModel.token.toString();
                 USERID = state.NewsLoginModel.user!.id.toString();
-                NavigateAndFinish(context, HomeScreen());
+                NavigateAndFinish(context, const HomeScreen());
               });
 
               showToast(
@@ -62,36 +66,38 @@ class LoginScreen extends StatelessWidget {
                     key: formKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
-                        Container(
+                        SizedBox(
                           width: 200,
                           height: 200,
                           child: Image.asset('assets/images/logo.png'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15.0,
                         ),
-                        Text(
+                        const Text(
                           'Sign in To Your Account',
                           style: TextStyle(
                               fontSize: 18.0, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         defaultFormField(
                           controller: EmailController,
                           type: TextInputType.emailAddress,
                           validate: (String? value) {
-                            if (value!.isEmpty)
+                            if (value!.isEmpty) {
                               return 'Please Enter Your Email';
+                            }
+                            return null;
                           },
                           label: 'Email',
                           prefix: Icons.email,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         defaultFormField(
@@ -102,6 +108,7 @@ class LoginScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           validate: (String? value) {
                             if (value!.isEmpty) return 'Password is Too Short';
+                            return null;
                           },
                           onSubmit: (value) {
                             if (formKey.currentState!.validate()) {
@@ -119,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                           label: 'Password',
                           prefix: Icons.lock_outline,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         ConditionalBuilder(
@@ -139,15 +146,15 @@ class LoginScreen extends StatelessWidget {
                             isUpperCase: true,
                           ),
                           fallback: (context) =>
-                              Center(child: CircularProgressIndicator()),
+                              const Center(child: CircularProgressIndicator()),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30.0,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Don\'t have An Account?'),
+                            const Text('Don\'t have An Account?'),
                             defaultTextButton(
                                 function: () {
                                   NavigateTo(context, RegisterScreen());

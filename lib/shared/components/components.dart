@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/models/allfav/all.dart';
 import 'package:youngeyes/models/news/newsmodel.dart';
+import 'package:youngeyes/models/topview/top.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
 Widget defaultButton({
@@ -159,6 +160,103 @@ Widget NewsItem(
                   alignment: Alignment.bottomRight,
                   child: Text(
                     '${allNews.post?[index].createdAt}',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+Widget TopViewItem(
+        {required TopViewer topViewer,
+        required BuildContext context,
+        required int index,
+        required Function function}) =>
+    GestureDetector(
+      onTap: () {
+        function();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Card(
+          elevation: 13.0,
+          child: Container(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: CachedNetworkImage(
+                    height: 200,
+                    fit: BoxFit.cover,
+                    imageUrl:
+                        'https://whitecompressor.com/storage/${topViewer.image}',
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: defaultColor,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey,
+                            highlightColor: defaultColor,
+                            child: Image.asset('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+                // FadeInImage(
+                //     height: 200,
+                //     placeholder: AssetImage('assets/images/placeholder.png'),
+                //     image: NetworkImage(
+                //         'https://whitecompressor.com/storage/${allNews.post?[index].image}')),
+                const SizedBox(
+                  height: 4,
+                ),
+                SizedBox(
+                  height: 40,
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      FadeAnimatedText('${topViewer.title}',
+                          textStyle: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis)),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  '${topViewer.content}',
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(color: Colors.black),
+                ),
+                Container(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    '${topViewer.createdAt}',
                     style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.normal,

@@ -145,6 +145,7 @@ class RegisterScreen extends StatelessWidget {
                           suffixPressed: () {
                             NewsRegisterCubit.get(context)
                                 .changePasswordVisibility();
+                            print(rePasswordController.text);
                           },
                           label: 'RePassword',
                           lines: 1,
@@ -157,6 +158,10 @@ class RegisterScreen extends StatelessWidget {
                           condition: state is! NewsRegisterLoadingState,
                           builder: (context) => defaultButton(
                             function: () {
+                              print(nameController.text);
+                              print(emailController.text);
+                              print(passwordController.text);
+                              print(rePasswordController.text);
                               if (formKey.currentState!.validate()) {
                                 NewsRegisterCubit.get(context).userRegister(
                                   name: nameController.text,

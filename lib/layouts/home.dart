@@ -5,6 +5,8 @@ import 'package:youngeyes/layouts/cubit/cubit.dart';
 import 'package:youngeyes/layouts/cubit/states.dart';
 import 'package:youngeyes/modules/category/cubit/cubit.dart';
 import 'package:youngeyes/modules/profile/cubit/cubit.dart';
+import 'package:youngeyes/modules/topviewed/top.dart';
+import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
@@ -30,6 +32,20 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           var cubit = AppCubit.get(context);
           return Scaffold(
+            appBar: AppBar(actions: [
+              InkWell(
+                onTap: () {
+                  NavigateTo(context, TopViewd());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.sort,
+                    size: 30,
+                  ),
+                ),
+              )
+            ]),
             body: cubit.bottomScreens[cubit.currentIndex],
             bottomNavigationBar: CurvedNavigationBar(
               backgroundColor: defaultColor,

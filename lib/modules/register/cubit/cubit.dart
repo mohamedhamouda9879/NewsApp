@@ -40,9 +40,7 @@ class NewsRegisterCubit extends Cubit<NewsRegisterStates> {
       emit(NewsRegisterSuccessState(loginModel!));
     }).catchError((error) {
       print('error y hamouda ${error.toString()}');
-      showToast(
-          message: "The email has already been taken.",
-          toastStates: ToastStates.EROOR);
+      showToast(message: "Wrong Sign up", toastStates: ToastStates.EROOR);
       emit(NewsRegisterErrorState(error.toString()));
     });
   }

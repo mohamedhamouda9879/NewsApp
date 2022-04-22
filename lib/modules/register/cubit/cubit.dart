@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:youngeyes/layouts/home.dart';
 import 'package:youngeyes/models/register/registermodel.dart';
+import 'package:youngeyes/modules/login/login.dart';
 import 'package:youngeyes/modules/register/cubit/states.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/network/remote/dio_helper.dart';
@@ -13,7 +13,7 @@ class NewsRegisterCubit extends Cubit<NewsRegisterStates> {
 
   static NewsRegisterCubit get(context) => BlocProvider.of(context);
 
-  RegisterModel? loginModel;
+  RegisterModel? registerModel;
 
   void userRegister(
       {required String name,
@@ -32,17 +32,21 @@ class NewsRegisterCubit extends Cubit<NewsRegisterStates> {
         'password_confirmation': RePassword,
       },
     ).then((value) {
-      loginModel = RegisterModel.fromJson(value.data);
+      print('object');
+      print(value.data.toString());
+
+      registerModel = RegisterModel.fromJson(value.data);
       print(value.data);
       print('done y bashaaa');
 
-      NavigateAndFinish(context, const HomeScreen());
-      emit(NewsRegisterSuccessState(loginModel!));
+      NavigateAndFinish(context, LoginScreen());
+      emit(NewsRegisterSuccessState(registerModel!));
     }).catchError((error) {
+      //print();
+
       print('error y hamouda ${error.toString()}');
       showToast(
-          message: "The email has already been taken.",
-          toastStates: ToastStates.EROOR);
+          message: "Please Enter Right Data.", toastStates: ToastStates.EROOR);
       emit(NewsRegisterErrorState(error.toString()));
     });
   }

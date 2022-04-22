@@ -7,9 +7,9 @@ class NewsRegisterInitialState extends NewsRegisterStates {}
 class NewsRegisterLoadingState extends NewsRegisterStates {}
 
 class NewsRegisterSuccessState extends NewsRegisterStates {
-  final RegisterModel loginModel;
+  final RegisterModel registerModel;
 
-  NewsRegisterSuccessState(this.loginModel);
+  NewsRegisterSuccessState(this.registerModel);
 }
 
 class NewsRegisterErrorState extends NewsRegisterStates {

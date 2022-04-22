@@ -3,7 +3,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:youngeyes/layouts/home.dart';
 import 'package:youngeyes/modules/login/login.dart';
 import 'package:youngeyes/modules/register/cubit/cubit.dart';
 import 'package:youngeyes/modules/register/cubit/states.dart';
@@ -16,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var rePasswordController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  var formKey2 = GlobalKey<FormState>();
   String? compare;
 
   RegisterScreen({Key? key}) : super(key: key);
@@ -28,23 +27,25 @@ class RegisterScreen extends StatelessWidget {
       child: BlocConsumer<NewsRegisterCubit, NewsRegisterStates>(
         listener: ((context, state) {
           if (state is NewsRegisterSuccessState) {
-            if (state.loginModel.token != null) {
-              print(state.loginModel.token);
-              print(state.loginModel.toString());
+            if (state.registerModel.token != null) {
+              print(state.registerModel.token);
+              print(state.registerModel.toString());
               CacheHelper.saveData(
-                  key: 'UserID', value: state.loginModel.user!.id.toString());
-              CacheHelper.saveData(key: 'token', value: state.loginModel.token)
+                  key: 'UserID',
+                  value: state.registerModel.user!.id.toString());
+              CacheHelper.saveData(
+                      key: 'token', value: state.registerModel.token)
                   .then((value) {
-                TOKEN = state.loginModel.token.toString();
+                TOKEN = state.registerModel.token.toString();
                 // USERID = state.loginModel.user!.id.toString();
-                NavigateAndFinish(context, const HomeScreen());
+                NavigateAndFinish(context, LoginScreen());
               });
               showToast(
                   message: 'Successfully Login',
                   toastStates: ToastStates.SUCCESS);
             } else {
               print('hamouda');
-              print(state.loginModel.token);
+              print(state.registerModel.token);
               showToast(
                   message: "Wrong Sign In", toastStates: ToastStates.EROOR);
             }
@@ -58,7 +59,7 @@ class RegisterScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Form(
-                    key: formKey,
+                    key: formKey2,
                     child: Column(
                       children: [
                         Image.asset(
@@ -157,7 +158,11 @@ class RegisterScreen extends StatelessWidget {
                           condition: state is! NewsRegisterLoadingState,
                           builder: (context) => defaultButton(
                             function: () {
-                              if (formKey.currentState!.validate()) {
+                              print(nameController.text);
+                              print(emailController.text);
+                              print(passwordController.text);
+                              print('ggg pass${rePasswordController.text}');
+                              if (formKey2.currentState!.validate()) {
                                 NewsRegisterCubit.get(context).userRegister(
                                   name: nameController.text,
                                   email: emailController.text,

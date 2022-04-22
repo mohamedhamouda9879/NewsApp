@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/layouts/cubit/cubit.dart';
 import 'package:youngeyes/layouts/cubit/states.dart';
 import 'package:youngeyes/modules/category/cubit/cubit.dart';
-import 'package:youngeyes/modules/profile/cubit/cubit.dart';
-import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()),
         BlocProvider(
             create: (context) => CategoryCubit()..getCategory(context)),
-        BlocProvider(create: (context) => ProfileCubit()..getProfile(USERID!)),
+        // BlocProvider(create: (context) => ProfileCubit()..getProfile(USERID!)),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},

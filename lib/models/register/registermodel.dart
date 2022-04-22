@@ -8,15 +8,6 @@ class RegisterModel {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    data['token'] = token;
-    return data;
-  }
 }
 
 class User {
@@ -39,15 +30,5 @@ class User {
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
     id = json['id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['email'] = email;
-    data['password_confirmation'] = passwordConfirmation;
-    data['updated_at'] = updatedAt;
-    data['created_at'] = createdAt;
-    data['id'] = id;
-    return data;
   }
 }

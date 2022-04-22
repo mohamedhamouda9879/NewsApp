@@ -15,7 +15,7 @@ class AppCubit extends Cubit<AppStates> {
   List<Widget> bottomScreens = [
     const CategoriesScreen(),
     const FavouritesScreen(),
-    const ProfileScreen(),
+    const TopViewdScreen(),
   ];
 
   void changeBottomNav(int index) {

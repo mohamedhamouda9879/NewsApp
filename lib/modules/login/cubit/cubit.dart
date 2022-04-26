@@ -38,7 +38,9 @@ class NewsLoginCubit extends Cubit<NewsLoginStates> {
         emit(NewsLoginErrorStates('error'));
       }
     }).catchError((error) {
-      showToast(message: error.toString(), toastStates: ToastStates.EROOR);
+      showToast(
+          message: 'Enter Your Email and Password',
+          toastStates: ToastStates.EROOR);
       emit(NewsLoginErrorStates(error.toString()));
     });
   }

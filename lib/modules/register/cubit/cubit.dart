@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:youngeyes/models/error/error.dart';
 import 'package:youngeyes/models/register/registermodel.dart';
 import 'package:youngeyes/modules/login/login.dart';
 import 'package:youngeyes/modules/register/cubit/states.dart';
@@ -14,16 +17,20 @@ class NewsRegisterCubit extends Cubit<NewsRegisterStates> {
   static NewsRegisterCubit get(context) => BlocProvider.of(context);
 
   RegisterModel? registerModel;
+  ErrorModel? errorModel;
 
   void userRegister(
       {required String name,
       required String email,
       required String password,
       required String RePassword,
-      required BuildContext context}) {
+      required BuildContext context}) async {
     emit(NewsRegisterLoadingState());
-
-    DioHelper.postData(
+    print('$name');
+    print('$email');
+    print('$password');
+    print('$RePassword');
+    await DioHelper.postData(
       Url: "register",
       data: {
         'name': name,
@@ -32,17 +39,35 @@ class NewsRegisterCubit extends Cubit<NewsRegisterStates> {
         'password_confirmation': RePassword,
       },
     ).then((value) {
-      print('object');
-      print(value.data.toString());
+      if (value.statusCode == 200 || value.statusCode == 201) {
+        print('422');
+        registerModel = RegisterModel.fromJson(value.data);
+        if (registerModel!.status == true) {
+          print('register${registerModel!.token}');
+          print('register${registerModel!.message}');
 
-      registerModel = RegisterModel.fromJson(value.data);
-      print(value.data);
-      print('done y bashaaa');
+          NavigateAndFinish(context, LoginScreen());
+          emit(NewsRegisterSuccessState(registerModel!));
+        } else if (registerModel!.status == false) {
+          errorModel = ErrorModel.fromJson(value.data);
+          showToast(
+              message: "${errorModel!.message}",
+              toastStates: ToastStates.EROOR);
+          emit(NewsRegisterSuccessState(registerModel!));
+        }
+      }
+      // print('object');
+      // print(value.data.toString());
 
-      NavigateAndFinish(context, LoginScreen());
-      emit(NewsRegisterSuccessState(registerModel!));
+      // registerModel = RegisterModel.fromJson(value.data);
+      // print(value.data);
+      // print('done y bashaaa');
+
+      // NavigateAndFinish(context, LoginScreen());
+      // emit(NewsRegisterSuccessState(registerModel!));
     }).catchError((error) {
-      //print();
+      //errorModel = ErrorModel.fromJson(error.toString());
+      //print(errorModel!.message.toString());
 
       print('error y hamouda ${error.toString()}');
       showToast(

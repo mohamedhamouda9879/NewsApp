@@ -20,54 +20,73 @@ class CategoriesScreen extends StatelessWidget {
       child: BlocConsumer<CategoryCubit, CategoryStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Scaffold(
-            body: ConditionalBuilderRec(
-              condition: CategoryCubit.get(context).categoryModel.isNotEmpty,
-              builder: (context) => AnimationLimiter(
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: CategoryCubit.get(context).categoryModel.length,
-                  itemBuilder: (context, index) {
-                    return CategoryItem(
-                        context,
-                        mq.width * 0.80,
-                        mq.height * 0.30,
-                        CategoryCubit.get(context).categoryModel[index].image,
-                        CategoryCubit.get(context).categoryModel[index].entitle,
-                        CategoryCubit.get(context).categoryModel[index].artitle,
-                        () {
-                      NavigateTo(
+          if (state is CategorySuccessState) {
+            return Scaffold(
+              body: ConditionalBuilderRec(
+                condition: CategoryCubit.get(context).categoryModel.isNotEmpty,
+                builder: (context) => AnimationLimiter(
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: CategoryCubit.get(context).categoryModel.length,
+                    itemBuilder: (context, index) {
+                      return CategoryItem(
                           context,
-                          NewsScreen(CategoryCubit.get(context)
+                          mq.width * 0.80,
+                          mq.height * 0.30,
+                          CategoryCubit.get(context).categoryModel[index].image,
+                          CategoryCubit.get(context)
                               .categoryModel[index]
-                              .id
-                              .toString()));
-                    });
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 8,
-                    );
-                  },
+                              .entitle,
+                          CategoryCubit.get(context)
+                              .categoryModel[index]
+                              .artitle, () {
+                        NavigateTo(
+                            context,
+                            NewsScreen(CategoryCubit.get(context)
+                                .categoryModel[index]
+                                .id
+                                .toString()));
+                      });
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        height: 8,
+                      );
+                    },
+                  ),
                 ),
-              ),
-              fallback: (context) => Center(
-                child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Shimmer.fromColors(
-                    baseColor: Colors.grey,
-                    highlightColor: defaultColor,
+                fallback: (context) => Center(
+                  child: SizedBox(
+                    height: 100,
+                    width: 100,
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey,
                       highlightColor: defaultColor,
-                      child: Image.asset('assets/images/logo.png'),
+                      child: Shimmer.fromColors(
+                        baseColor: Colors.grey,
+                        highlightColor: defaultColor,
+                        child: Image.asset('assets/images/logo.png'),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
+            );
+          } else {
+            return SizedBox(
+              height: 100,
+              width: 100,
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey,
+                highlightColor: defaultColor,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey,
+                  highlightColor: defaultColor,
+                  child: Image.asset('assets/images/logo.png'),
+                ),
+              ),
+            );
+          }
         },
       ),
     );

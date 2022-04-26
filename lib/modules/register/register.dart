@@ -112,6 +112,9 @@ class RegisterScreen extends StatelessWidget {
                           type: TextInputType.visiblePassword,
                           validate: (String? value) {
                             if (value!.isEmpty) {
+                              return 'password is empty';
+                            }
+                            if (value.length < 7) {
                               return 'password is too short';
                             }
                             compare = value;

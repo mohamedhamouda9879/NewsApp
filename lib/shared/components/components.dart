@@ -234,6 +234,7 @@ Widget NewsItem(
                     repeatForever: true,
                     animatedTexts: [
                       FadeAnimatedText('${allNews.post?[index].title}',
+                          textAlign: TextAlign.right,
                           textStyle: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -247,6 +248,7 @@ Widget NewsItem(
                 Text(
                   '${allNews.post?[index].content}',
                   maxLines: 3,
+                  textAlign: TextAlign.right,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
                       .textTheme
@@ -257,6 +259,7 @@ Widget NewsItem(
                   alignment: Alignment.bottomRight,
                   child: Text(
                     '${allNews.post?[index].createdAt}',
+                    textAlign: TextAlign.right,
                     style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.normal,

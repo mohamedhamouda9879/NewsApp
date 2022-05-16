@@ -41,7 +41,7 @@ class RegisterScreen extends StatelessWidget {
                 NavigateAndFinish(context, LoginScreen());
               });
               showToast(
-                  message: 'Successfully Login',
+                  message: 'Successfully Sign Up',
                   toastStates: ToastStates.SUCCESS);
             } else {
               print('hamouda');

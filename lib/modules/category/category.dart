@@ -73,16 +73,18 @@ class CategoriesScreen extends StatelessWidget {
               ),
             );
           } else {
-            return SizedBox(
-              height: 100,
-              width: 100,
-              child: Shimmer.fromColors(
-                baseColor: Colors.grey,
-                highlightColor: defaultColor,
+            return Center(
+              child: SizedBox(
+                height: 100,
+                width: 100,
                 child: Shimmer.fromColors(
                   baseColor: Colors.grey,
                   highlightColor: defaultColor,
-                  child: Image.asset('assets/images/logo.png'),
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: defaultColor,
+                    child: Image.asset('assets/images/logo.png'),
+                  ),
                 ),
               ),
             );

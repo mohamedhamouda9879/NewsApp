@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.enterprise.youngeyes">
+    package="com.enterp.youngeyes">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="Young Eyes"
         android:name="${applicationName}"

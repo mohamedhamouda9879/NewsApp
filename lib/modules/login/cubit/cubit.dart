@@ -29,14 +29,21 @@ class NewsLoginCubit extends Cubit<NewsLoginStates> {
       NewsLoginModel = LoginModel.fromJson(value.data);
       print(value.toString());
       print('hamouda login y basha ');
-
-      if (NewsLoginModel!.token != null) {
+      if (NewsLoginModel!.status == true) {
         NavigateAndFinish(context, const HomeScreen());
         emit(NewsLoginSucessStates(NewsLoginModel!));
       } else {
-        showToast(message: "Wrong Login", toastStates: ToastStates.EROOR);
+        showToast(
+            message: "Email or password wrong", toastStates: ToastStates.EROOR);
         emit(NewsLoginErrorStates('error'));
       }
+      // if (NewsLoginModel!.token != null) {
+      //   NavigateAndFinish(context, const HomeScreen());
+      //   emit(NewsLoginSucessStates(NewsLoginModel!));
+      // } else {
+      //   showToast(message: "Wrong Login", toastStates: ToastStates.EROOR);
+      //   emit(NewsLoginErrorStates('error'));
+      // }
     }).catchError((error) {
       showToast(
           message: 'Enter Your Email and Password',

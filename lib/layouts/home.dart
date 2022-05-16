@@ -41,31 +41,35 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text('Y',
                           style: GoogleFonts.abrilFatface(
-                              color: Colors.white, fontSize: 45)),
+                              color: Colors.white, fontSize: 25)),
                       Text('0',
                           style: GoogleFonts.abrilFatface(
                               color: Color.fromARGB(255, 17, 3, 137),
-                              fontSize: 35)),
+                              fontSize: 25)),
                       Text('UNG',
                           style: GoogleFonts.abrilFatface(
                               wordSpacing: 3,
                               color: Colors.white,
-                              fontSize: 35)),
+                              fontSize: 25)),
                       Text(' E',
                           style: GoogleFonts.abrilFatface(
                               color: Color.fromARGB(255, 17, 3, 137),
-                              fontSize: 35)),
+                              fontSize: 25)),
                       Text('YE',
                           style: GoogleFonts.abrilFatface(
-                              color: Colors.white, fontSize: 35)),
+                              color: Colors.white, fontSize: 25)),
                       Text('S',
                           style: GoogleFonts.abrilFatface(
-                              color: Colors.white, fontSize: 35)),
+                              color: Colors.white, fontSize: 25)),
                       EasyRichText(
                         "عيون شابة",
                         patternList: [
                           EasyRichTextPattern(
-                              targetString: 'عيون شابة', subScript: true),
+                              style: GoogleFonts.changa(
+                                  color: Color.fromARGB(255, 17, 3, 137),
+                                  fontSize: 16),
+                              targetString: 'عيون شابة',
+                              superScript: true),
                         ],
                       ),
                     ],

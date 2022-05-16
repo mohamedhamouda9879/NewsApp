@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
+import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -45,7 +46,6 @@ class NewsDetailsScreen extends StatelessWidget {
                 child: Scaffold(
                   backgroundColor: Colors.transparent,
                   appBar: AppBar(
-                    automaticallyImplyLeading: false,
                     elevation: 0,
                     title: Center(
                       child: Row(
@@ -53,31 +53,41 @@ class NewsDetailsScreen extends StatelessWidget {
                         children: [
                           Text('Y',
                               style: GoogleFonts.abrilFatface(
-                                  color: Colors.amber, fontSize: 45)),
+                                  color: Colors.white, fontSize: 25)),
                           Text('0',
                               style: GoogleFonts.abrilFatface(
                                   color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
+                                  fontSize: 25)),
                           Text('UNG',
                               style: GoogleFonts.abrilFatface(
                                   wordSpacing: 3,
-                                  color: Colors.amber,
-                                  fontSize: 35)),
+                                  color: Colors.white,
+                                  fontSize: 25)),
                           Text(' E',
                               style: GoogleFonts.abrilFatface(
                                   color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
+                                  fontSize: 25)),
                           Text('YE',
                               style: GoogleFonts.abrilFatface(
-                                  color: Colors.amber, fontSize: 35)),
+                                  color: Colors.white, fontSize: 25)),
                           Text('S',
                               style: GoogleFonts.abrilFatface(
-                                  color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
+                                  color: Colors.white, fontSize: 25)),
+                          EasyRichText(
+                            "عيون شابة",
+                            patternList: [
+                              EasyRichTextPattern(
+                                  style: GoogleFonts.changa(
+                                      color: Color.fromARGB(255, 17, 3, 137),
+                                      fontSize: 16),
+                                  targetString: 'عيون شابة',
+                                  superScript: true),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                    backgroundColor: Colors.white,
+                    backgroundColor: defaultColor,
                   ),
                   resizeToAvoidBottomInset: true,
                   floatingActionButton: FloatingActionButton(

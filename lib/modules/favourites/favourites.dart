@@ -25,48 +25,48 @@ class FavouritesScreen extends StatelessWidget {
         builder: (context, state) {
           return SafeArea(
               child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              title: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Y',
-                        style: GoogleFonts.abrilFatface(
-                            color: Colors.white, fontSize: 25)),
-                    Text('0',
-                        style: GoogleFonts.abrilFatface(
-                            color: Color.fromARGB(255, 17, 3, 137),
-                            fontSize: 25)),
-                    Text('UNG',
-                        style: GoogleFonts.abrilFatface(
-                            wordSpacing: 3, color: Colors.white, fontSize: 25)),
-                    Text(' E',
-                        style: GoogleFonts.abrilFatface(
-                            color: Color.fromARGB(255, 17, 3, 137),
-                            fontSize: 25)),
-                    Text('YE',
-                        style: GoogleFonts.abrilFatface(
-                            color: Colors.white, fontSize: 25)),
-                    Text('S',
-                        style: GoogleFonts.abrilFatface(
-                            color: Colors.white, fontSize: 25)),
-                    EasyRichText(
-                      "عيون شابة",
-                      patternList: [
-                        EasyRichTextPattern(
-                            style: GoogleFonts.changa(
-                                color: Color.fromARGB(255, 17, 3, 137),
-                                fontSize: 16),
-                            targetString: 'عيون شابة',
-                            superScript: true),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              backgroundColor: defaultColor,
-            ),
+            // appBar: AppBar(
+            //   elevation: 0,
+            //   title: Center(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         Text('Y',
+            //             style: GoogleFonts.abrilFatface(
+            //                 color: Colors.white, fontSize: 25)),
+            //         Text('0',
+            //             style: GoogleFonts.abrilFatface(
+            //                 color: Color.fromARGB(255, 17, 3, 137),
+            //                 fontSize: 25)),
+            //         Text('UNG',
+            //             style: GoogleFonts.abrilFatface(
+            //                 wordSpacing: 3, color: Colors.white, fontSize: 25)),
+            //         Text(' E',
+            //             style: GoogleFonts.abrilFatface(
+            //                 color: Color.fromARGB(255, 17, 3, 137),
+            //                 fontSize: 25)),
+            //         Text('YE',
+            //             style: GoogleFonts.abrilFatface(
+            //                 color: Colors.white, fontSize: 25)),
+            //         Text('S',
+            //             style: GoogleFonts.abrilFatface(
+            //                 color: Colors.white, fontSize: 25)),
+            //         EasyRichText(
+            //           "عيون شابة",
+            //           patternList: [
+            //             EasyRichTextPattern(
+            //                 style: GoogleFonts.changa(
+            //                     color: Color.fromARGB(255, 17, 3, 137),
+            //                     fontSize: 16),
+            //                 targetString: 'عيون شابة',
+            //                 superScript: true),
+            //           ],
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            //   backgroundColor: defaultColor,
+            // ),
             body: ConditionalBuilderRec(
               condition: state is GetAllFavSuccessState,
               builder: (context) => ListView.separated(

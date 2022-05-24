@@ -6,9 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animations/loading_animations.dart';
+import 'package:phlox_animations/phlox_animations.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/modules/details/cubit/cubit.dart';
 import 'package:youngeyes/modules/details/cubit/states.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
@@ -82,9 +85,11 @@ class NewsDetailsScreen extends StatelessWidget {
                   resizeToAvoidBottomInset: true,
                   floatingActionButton: FloatingActionButton(
                     backgroundColor: defaultColor,
-                    child: const Icon(
-                      Icons.comment,
-                      color: Colors.white,
+                    child: LoadingFlipping.square(
+                      itemBuilder: (context, index) => Icon(
+                        Icons.comment,
+                        color: Colors.white,
+                      ),
                     ),
                     onPressed: () {
                       showModalBottomSheet(
@@ -116,31 +121,38 @@ class NewsDetailsScreen extends StatelessWidget {
                                   ? Container(
                                       padding: const EdgeInsets.all(3.0),
                                       width: MediaQuery.of(context).size.width,
-                                      child: CachedNetworkImage(
-                                        height: 180,
-                                        fit: BoxFit.cover,
-                                        imageUrl:
-                                            'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                Center(
-                                          child: SizedBox(
-                                            height: 100,
-                                            width: 100,
-                                            child: Shimmer.fromColors(
-                                              baseColor: Colors.grey,
-                                              highlightColor: defaultColor,
+                                      child: PhloxAnimations(
+                                        duration: const Duration(seconds: 2),
+                                        toScale: 1,
+                                        fromScale: 0,
+                                        toDegrees: 0,
+                                        fromDegrees: -90,
+                                        child: CachedNetworkImage(
+                                          height: 180,
+                                          fit: BoxFit.cover,
+                                          imageUrl:
+                                              'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: SizedBox(
+                                              height: 100,
+                                              width: 100,
                                               child: Shimmer.fromColors(
                                                 baseColor: Colors.grey,
                                                 highlightColor: defaultColor,
-                                                child: Image.asset(
-                                                    'assets/images/logo.png'),
+                                                child: Shimmer.fromColors(
+                                                  baseColor: Colors.grey,
+                                                  highlightColor: defaultColor,
+                                                  child: Image.asset(
+                                                      'assets/images/logo.png'),
+                                                ),
                                               ),
                                             ),
                                           ),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(Icons.error),
                                       ),
                                     )
                                   // ? Image.network(

@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
+  animation_list:
+    dependency: "direct main"
+    description:
+      name: animation_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   archive:
     dependency: transitive
     description:
@@ -310,6 +317,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  loading_animations:
+    dependency: "direct main"
+    description:
+      name: loading_animations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   matcher:
     dependency: transitive
     description:
@@ -415,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
+  phlox_animations:
+    dependency: "direct main"
+    description:
+      name: phlox_animations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   platform:
     dependency: transitive
     description:

@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phlox_animations/phlox_animations.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/models/allfav/all.dart';
 import 'package:youngeyes/models/news/newsmodel.dart';
@@ -99,29 +100,34 @@ Widget TopViewItem(
                 Container(
                   padding: const EdgeInsets.all(3.0),
                   width: MediaQuery.of(context).size.width,
-                  child: CachedNetworkImage(
-                    height: 200,
-                    fit: BoxFit.cover,
-                    imageUrl:
-                        'https://whitecompressor.com/storage/${topViewer.image}',
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.grey,
-                          highlightColor: defaultColor,
+                  child: PhloxAnimations(
+                    duration: const Duration(seconds: 2),
+                    fromScale: 0,
+                    toScale: 1,
+                    child: CachedNetworkImage(
+                      height: 200,
+                      fit: BoxFit.cover,
+                      imageUrl:
+                          'https://whitecompressor.com/storage/${topViewer.image}',
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
                           child: Shimmer.fromColors(
                             baseColor: Colors.grey,
                             highlightColor: defaultColor,
-                            child: Image.asset('assets/images/logo.png'),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: defaultColor,
+                              child: Image.asset('assets/images/logo.png'),
+                            ),
                           ),
                         ),
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
                   ),
                 ),
                 // FadeInImage(
@@ -195,29 +201,34 @@ Widget NewsItem(
                 Container(
                   padding: const EdgeInsets.all(3.0),
                   width: MediaQuery.of(context).size.width,
-                  child: CachedNetworkImage(
-                    height: 200,
-                    fit: BoxFit.cover,
-                    imageUrl:
-                        'https://whitecompressor.com/storage/${allNews.post?[index].image}',
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.grey,
-                          highlightColor: defaultColor,
+                  child: PhloxAnimations(
+                    duration: const Duration(seconds: 2),
+                    toScale: 1,
+                    fromScale: 0,
+                    child: CachedNetworkImage(
+                      height: 200,
+                      fit: BoxFit.cover,
+                      imageUrl:
+                          'https://whitecompressor.com/storage/${allNews.post?[index].image}',
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
                           child: Shimmer.fromColors(
                             baseColor: Colors.grey,
                             highlightColor: defaultColor,
-                            child: Image.asset('assets/images/logo.png'),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: defaultColor,
+                              child: Image.asset('assets/images/logo.png'),
+                            ),
                           ),
                         ),
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
                   ),
                 ),
                 // FadeInImage(
@@ -295,29 +306,34 @@ Widget NewsItemFav(
                 Container(
                   padding: const EdgeInsets.all(3.0),
                   width: MediaQuery.of(context).size.width,
-                  child: CachedNetworkImage(
-                    height: 200,
-                    fit: BoxFit.cover,
-                    imageUrl:
-                        'https://whitecompressor.com/storage/${getAllFavouriteModel.favourites?[index].post?.image.toString()}',
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.grey,
-                          highlightColor: defaultColor,
+                  child: PhloxAnimations(
+                    duration: const Duration(seconds: 2),
+                    toScale: 1,
+                    fromScale: 0,
+                    child: CachedNetworkImage(
+                      height: 200,
+                      fit: BoxFit.cover,
+                      imageUrl:
+                          'https://whitecompressor.com/storage/${getAllFavouriteModel.favourites?[index].post?.image.toString()}',
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
                           child: Shimmer.fromColors(
                             baseColor: Colors.grey,
                             highlightColor: defaultColor,
-                            child: Image.asset('assets/images/logo.png'),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: defaultColor,
+                              child: Image.asset('assets/images/logo.png'),
+                            ),
                           ),
                         ),
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
                   ),
                 ),
                 // FadeInImage(
@@ -460,28 +476,33 @@ Widget CategoryItem(BuildContext context, double width, double height,
             Container(
               padding: const EdgeInsets.all(3.0),
               width: MediaQuery.of(context).size.width,
-              child: CachedNetworkImage(
-                width: width,
-                height: height,
-                fit: BoxFit.cover,
-                imageUrl: 'https://whitecompressor.com/storage/$image',
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                  child: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: Shimmer.fromColors(
-                      baseColor: Colors.grey,
-                      highlightColor: defaultColor,
+              child: PhloxAnimations(
+                duration: const Duration(seconds: 3),
+                toScale: 1,
+                fromScale: 0,
+                child: CachedNetworkImage(
+                  width: width,
+                  height: height,
+                  fit: BoxFit.cover,
+                  imageUrl: 'https://whitecompressor.com/storage/$image',
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                    child: SizedBox(
+                      height: 100,
+                      width: 100,
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey,
                         highlightColor: defaultColor,
-                        child: Image.asset('assets/images/logo.png'),
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: defaultColor,
+                          child: Image.asset('assets/images/logo.png'),
+                        ),
                       ),
                     ),
                   ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
             Container(

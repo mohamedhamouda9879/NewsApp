@@ -5,8 +5,10 @@ class NewsDetailsModel {
   String? image;
   String? categoryId;
   String? rememberToken;
+
   String? createdAt;
   String? updatedAt;
+  String? video;
   List<Comments>? comments;
   List<Favourites>? favourites;
   Catagery? catagery;
@@ -20,6 +22,7 @@ class NewsDetailsModel {
       this.rememberToken,
       this.createdAt,
       this.updatedAt,
+      this.video,
       this.comments,
       this.favourites,
       this.catagery});
@@ -33,6 +36,7 @@ class NewsDetailsModel {
     rememberToken = json['remember_token'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    video = json['video'];
     if (json['comments'] != null) {
       comments = <Comments>[];
       json['comments'].forEach((v) {

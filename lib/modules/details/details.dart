@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:phlox_animations/phlox_animations.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youngeyes/modules/details/cubit/cubit.dart';
 import 'package:youngeyes/modules/details/cubit/states.dart';
 import 'package:loading_animations/loading_animations.dart';
@@ -22,6 +23,7 @@ class NewsDetailsScreen extends StatelessWidget {
   NewsDetailsScreen(this.newId);
   @override
   Widget build(BuildContext context) {
+    VideoPlayerController? _controller;
     return BlocProvider(
       create: (context) => NewsDetailsCubit()..getNewsDetails(NEWSID),
       child: BlocConsumer<NewsDetailsCubit, NewsDetailsStates>(
@@ -29,21 +31,23 @@ class NewsDetailsScreen extends StatelessWidget {
           if (state is NewsDetailsLoadingState) {
             print('hhhh');
           }
+
+          if (state is NewsDetailsSuccessState) {
+            _controller = VideoPlayerController.network(
+                '${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}')
+              ..initialize().then((_) {
+                // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+              });
+          }
         },
         builder: (context, state) {
           print(NEWSID);
           print(
               'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}');
+          print(
+              'Hamouda print https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}');
           if (state is NewsDetailsSuccessState || state is AddFavSuccessState) {
-            if (NewsDetailsCubit.get(context)
-                    .newsDetailsModel!
-                    .image!
-                    .substring(NewsDetailsCubit.get(context)
-                            .newsDetailsModel!
-                            .image!
-                            .length -
-                        3) !=
-                'mp4') {
+            if (NewsDetailsCubit.get(context).newsDetailsModel!.image != null) {
               return SafeArea(
                 child: Container(
                   decoration: const BoxDecoration(
@@ -228,7 +232,11 @@ class NewsDetailsScreen extends StatelessWidget {
               );
             } else {
 // please reeturn video
-              return Container();
+              return Center(
+                  child: AspectRatio(
+                aspectRatio: _controller!.value.aspectRatio,
+                child: VideoPlayer(_controller!),
+              ));
             }
           } else {
             return Scaffold(

@@ -35,188 +35,201 @@ class NewsDetailsScreen extends StatelessWidget {
           print(
               'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}');
           if (state is NewsDetailsSuccessState || state is AddFavSuccessState) {
-            return SafeArea(
-              child: Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomRight,
-                        colors: [
-                      Color.fromARGB(255, 251, 251, 251),
-                      Color.fromARGB(255, 240, 240, 240)
-                    ])),
-                child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  appBar: AppBar(
-                    automaticallyImplyLeading: false,
-                    elevation: 0,
-                    title: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Y',
-                              style: GoogleFonts.abrilFatface(
-                                  color: Colors.amber, fontSize: 45)),
-                          Text('0',
-                              style: GoogleFonts.abrilFatface(
-                                  color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
-                          Text('UNG',
-                              style: GoogleFonts.abrilFatface(
-                                  wordSpacing: 3,
-                                  color: Colors.amber,
-                                  fontSize: 35)),
-                          Text(' E',
-                              style: GoogleFonts.abrilFatface(
-                                  color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
-                          Text('YE',
-                              style: GoogleFonts.abrilFatface(
-                                  color: Colors.amber, fontSize: 35)),
-                          Text('S',
-                              style: GoogleFonts.abrilFatface(
-                                  color: Color.fromARGB(255, 17, 3, 137),
-                                  fontSize: 35)),
-                        ],
+            if (NewsDetailsCubit.get(context)
+                    .newsDetailsModel!
+                    .image!
+                    .substring(NewsDetailsCubit.get(context)
+                            .newsDetailsModel!
+                            .image!
+                            .length -
+                        3) !=
+                'mp4') {
+              return SafeArea(
+                child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomRight,
+                          colors: [
+                        Color.fromARGB(255, 251, 251, 251),
+                        Color.fromARGB(255, 240, 240, 240)
+                      ])),
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    appBar: AppBar(
+                      automaticallyImplyLeading: false,
+                      elevation: 0,
+                      title: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Y',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Colors.amber, fontSize: 45)),
+                            Text('0',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                            Text('UNG',
+                                style: GoogleFonts.abrilFatface(
+                                    wordSpacing: 3,
+                                    color: Colors.amber,
+                                    fontSize: 35)),
+                            Text(' E',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                            Text('YE',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Colors.amber, fontSize: 35)),
+                            Text('S',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                          ],
+                        ),
                       ),
+                      backgroundColor: Colors.white,
                     ),
-                    backgroundColor: Colors.white,
-                  ),
-                  resizeToAvoidBottomInset: true,
-                  floatingActionButton: FloatingActionButton(
-                    backgroundColor: defaultColor,
-                    child: LoadingFlipping.square(
-                      itemBuilder: (context, index) => Icon(
-                        Icons.comment,
-                        color: Colors.white,
+                    resizeToAvoidBottomInset: true,
+                    floatingActionButton: FloatingActionButton(
+                      backgroundColor: defaultColor,
+                      child: LoadingFlipping.square(
+                        itemBuilder: (context, index) => Icon(
+                          Icons.comment,
+                          color: Colors.white,
+                        ),
                       ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (builder) {
+                              return const ModalBottomSheet();
+                            });
+                      },
                     ),
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (builder) {
-                            return const ModalBottomSheet();
-                          });
-                    },
-                  ),
-                  body: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Card(
-                            elevation: 12.0,
-                            child: Container(
-                              height: 300,
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 8.0),
-                              child: NewsDetailsCubit.get(context)
-                                          .newsDetailsModel
-                                          ?.image
-                                          .toString() !=
-                                      null
-                                  ? Container(
-                                      padding: const EdgeInsets.all(3.0),
-                                      width: MediaQuery.of(context).size.width,
-                                      child: PhloxAnimations(
-                                        duration: const Duration(seconds: 2),
-                                        toScale: 1,
-                                        fromScale: 0,
-                                        toDegrees: 0,
-                                        fromDegrees: -90,
-                                        child: CachedNetworkImage(
-                                          height: 180,
-                                          fit: BoxFit.cover,
-                                          imageUrl:
-                                              'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Center(
-                                            child: SizedBox(
-                                              height: 100,
-                                              width: 100,
-                                              child: Shimmer.fromColors(
-                                                baseColor: Colors.grey,
-                                                highlightColor: defaultColor,
+                    body: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Card(
+                              elevation: 12.0,
+                              child: Container(
+                                height: 300,
+                                alignment: Alignment.center,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 8.0),
+                                child: (NewsDetailsCubit.get(context)
+                                            .newsDetailsModel
+                                            ?.image
+                                            .toString() !=
+                                        null)
+                                    ? Container(
+                                        padding: const EdgeInsets.all(3.0),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: PhloxAnimations(
+                                          duration: const Duration(seconds: 2),
+                                          toScale: 1,
+                                          fromScale: 0,
+                                          toDegrees: 0,
+                                          fromDegrees: -90,
+                                          child: CachedNetworkImage(
+                                            height: 180,
+                                            fit: BoxFit.cover,
+                                            imageUrl:
+                                                'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                Center(
+                                              child: SizedBox(
+                                                height: 100,
+                                                width: 100,
                                                 child: Shimmer.fromColors(
                                                   baseColor: Colors.grey,
                                                   highlightColor: defaultColor,
-                                                  child: Image.asset(
-                                                      'assets/images/logo.png'),
+                                                  child: Shimmer.fromColors(
+                                                    baseColor: Colors.grey,
+                                                    highlightColor:
+                                                        defaultColor,
+                                                    child: Image.asset(
+                                                        'assets/images/logo.png'),
+                                                  ),
                                                 ),
                                               ),
                                             ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
                                           ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
                                         ),
-                                      ),
-                                    )
-                                  // ? Image.network(
-                                  //     'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}',
-                                  //   )
-                                  : Image.asset(
-                                      'assets/images/placeholder.png'),
+                                      )
+                                    : Image.asset(
+                                        'assets/images/placeholder.png'),
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              print('hamouda bos $NEWSID');
-                              print('hamouda bos user rkmo $USERID');
-                              NewsDetailsCubit.get(context)
-                                  .addFav(NEWSID, USERID!);
-                              NewsDetailsCubit.get(context)
-                                  .changeFavVisibility();
-                            },
-                            child: CircleAvatar(
-                                backgroundColor: defaultColor,
-                                child: Icon(
-                                  NewsDetailsCubit.get(context).sufix,
-                                  color: Colors.white,
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('hamouda bos $NEWSID');
+                                print('hamouda bos user rkmo $USERID');
+                                NewsDetailsCubit.get(context)
+                                    .addFav(NEWSID, USERID!);
+                                NewsDetailsCubit.get(context)
+                                    .changeFavVisibility();
+                              },
+                              child: CircleAvatar(
+                                  backgroundColor: defaultColor,
+                                  child: Icon(
+                                    NewsDetailsCubit.get(context).sufix,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                                margin: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                child: Text(
+                                  NewsDetailsCubit.get(context)
+                                      .newsDetailsModel!
+                                      .title
+                                      .toString(),
+                                  textAlign: TextAlign.right,
+                                  style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
                                 )),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Container(
-                              margin: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                              child: Text(
-                                NewsDetailsCubit.get(context)
-                                    .newsDetailsModel!
-                                    .title
-                                    .toString(),
-                                textAlign: TextAlign.right,
-                                style: const TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Container(
-                              margin: const EdgeInsets.all(12.0),
-                              padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                NewsDetailsCubit.get(context)
-                                    .newsDetailsModel!
-                                    .content
-                                    .toString(),
-                                textAlign: TextAlign.right,
-                                style: Theme.of(context).textTheme.bodyText2,
-                              )),
-                        ],
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                                margin: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(6.0),
+                                child: Text(
+                                  NewsDetailsCubit.get(context)
+                                      .newsDetailsModel!
+                                      .content
+                                      .toString(),
+                                  textAlign: TextAlign.right,
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                )),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
+              );
+            } else {
+// please reeturn video
+              return Container();
+            }
           } else {
             return Scaffold(
               body: Center(

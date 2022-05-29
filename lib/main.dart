@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youngeyes/layouts/home.dart';
 import 'package:youngeyes/modules/login/login.dart';
+import 'package:youngeyes/modules/video/video.dart';
 import 'package:youngeyes/shared/bloc_observer.dart';
 import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/network/local/cache_helper.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: startWidget,
+      home: VideoScreen(),
       //home: NewsScreen(),
     );
   }

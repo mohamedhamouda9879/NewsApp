@@ -1,3 +1,4 @@
+import 'package:video_player/video_player.dart';
 import 'package:youngeyes/models/comments/add.dart';
 import 'package:youngeyes/models/comments/getall.dart';
 import 'package:youngeyes/models/details/details.dart';
@@ -40,3 +41,5 @@ class AddFavErrorState extends NewsDetailsStates {
 }
 
 class ChangeBorderFavSuccessState extends NewsDetailsStates {}
+
+class ExitScreen extends NewsDetailsStates {}

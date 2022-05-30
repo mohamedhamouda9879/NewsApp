@@ -68,23 +68,44 @@ class NewsScreen extends StatelessWidget {
                 condition: NewsCubit.get(context).allNews != null,
                 builder: (context) => ListView.separated(
                     itemBuilder: (context, index) {
-                      return NewsItem(
-                          allNews: NewsCubit.get(context).allNews!,
-                          context: context,
-                          index: index,
-                          function: () async {
-                            NEWSID = NewsCubit.get(context)
-                                .allNews!
-                                .post![index]
-                                .id
-                                .toString();
-                            NavigateTo(
-                                context,
-                                NewsDetailsScreen(NewsCubit.get(context)
-                                    .allNews!
-                                    .id
-                                    .toString()));
-                          });
+                      if (NewsCubit.get(context).allNews!.post![index].image !=
+                          null) {
+                        return NewsItem(
+                            allNews: NewsCubit.get(context).allNews!,
+                            context: context,
+                            index: index,
+                            function: () async {
+                              NEWSID = NewsCubit.get(context)
+                                  .allNews!
+                                  .post![index]
+                                  .id
+                                  .toString();
+                              NavigateTo(
+                                  context,
+                                  NewsDetailsScreen(NewsCubit.get(context)
+                                      .allNews!
+                                      .id
+                                      .toString()));
+                            });
+                      } else {
+                        return NewsItemVideo(
+                            allNews: NewsCubit.get(context).allNews!,
+                            context: context,
+                            index: index,
+                            function: () async {
+                              NEWSID = NewsCubit.get(context)
+                                  .allNews!
+                                  .post![index]
+                                  .id
+                                  .toString();
+                              NavigateTo(
+                                  context,
+                                  NewsDetailsScreen(NewsCubit.get(context)
+                                      .allNews!
+                                      .id
+                                      .toString()));
+                            });
+                      }
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return const Divider(

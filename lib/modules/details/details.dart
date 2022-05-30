@@ -17,13 +17,15 @@ import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/components/constants.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
+import '../../presentation/components/video/video.dart';
+
 class NewsDetailsScreen extends StatelessWidget {
   String? newId;
 
   NewsDetailsScreen(this.newId);
   @override
   Widget build(BuildContext context) {
-    VideoPlayerController? _controller;
+    //  VideoPlayerController? _controller;
     return BlocProvider(
       create: (context) => NewsDetailsCubit()..getNewsDetails(NEWSID),
       child: BlocConsumer<NewsDetailsCubit, NewsDetailsStates>(
@@ -32,18 +34,20 @@ class NewsDetailsScreen extends StatelessWidget {
             print('hhhh');
           }
 
-          if (state is NewsDetailsSuccessState) {
-            _controller = VideoPlayerController.network(
-                '${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}')
-              ..initialize().then((_) {
-                // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-              });
-          }
+          // if (state is NewsDetailsSuccessState) {
+          //   _controller = VideoPlayerController.network(
+          //       '${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}')
+          //     ..initialize().then((_) {
+          //       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+          //     });
+          // }
         },
         builder: (context, state) {
           print(NEWSID);
           print(
               'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.image.toString()}');
+          String videoURL =
+              'https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}';
           print(
               'Hamouda print https://whitecompressor.com/storage/${NewsDetailsCubit.get(context).newsDetailsModel?.video.toString()}');
           if (state is NewsDetailsSuccessState || state is AddFavSuccessState) {
@@ -232,11 +236,138 @@ class NewsDetailsScreen extends StatelessWidget {
               );
             } else {
 // please reeturn video
-              return Center(
-                  child: AspectRatio(
-                aspectRatio: _controller!.value.aspectRatio,
-                child: VideoPlayer(_controller!),
-              ));
+              return SafeArea(
+                child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomRight,
+                          colors: [
+                        Color.fromARGB(255, 251, 251, 251),
+                        Color.fromARGB(255, 240, 240, 240)
+                      ])),
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    appBar: AppBar(
+                      automaticallyImplyLeading: false,
+                      elevation: 0,
+                      title: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Y',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Colors.amber, fontSize: 45)),
+                            Text('0',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                            Text('UNG',
+                                style: GoogleFonts.abrilFatface(
+                                    wordSpacing: 3,
+                                    color: Colors.amber,
+                                    fontSize: 35)),
+                            Text(' E',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                            Text('YE',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Colors.amber, fontSize: 35)),
+                            Text('S',
+                                style: GoogleFonts.abrilFatface(
+                                    color: Color.fromARGB(255, 17, 3, 137),
+                                    fontSize: 35)),
+                          ],
+                        ),
+                      ),
+                      backgroundColor: Colors.white,
+                    ),
+                    resizeToAvoidBottomInset: true,
+                    floatingActionButton: FloatingActionButton(
+                      backgroundColor: defaultColor,
+                      child: LoadingFlipping.square(
+                        itemBuilder: (context, index) => Icon(
+                          Icons.comment,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (builder) {
+                              return const ModalBottomSheet();
+                            });
+                      },
+                    ),
+                    body: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Video.blocProvider(
+                              // Normally you'll get both the url and the aspect ratio from your video meta data
+                              videoURL,
+                              aspectRatio: 1.77,
+                              autoPlay: false,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('hamouda bos $NEWSID');
+                                print('hamouda bos user rkmo $USERID');
+                                NewsDetailsCubit.get(context)
+                                    .addFav(NEWSID, USERID!);
+                                NewsDetailsCubit.get(context)
+                                    .changeFavVisibility();
+                              },
+                              child: CircleAvatar(
+                                  backgroundColor: defaultColor,
+                                  child: Icon(
+                                    NewsDetailsCubit.get(context).sufix,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                                margin: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                                child: Text(
+                                  NewsDetailsCubit.get(context)
+                                      .newsDetailsModel!
+                                      .title
+                                      .toString(),
+                                  textAlign: TextAlign.right,
+                                  style: const TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                                margin: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(6.0),
+                                child: Text(
+                                  NewsDetailsCubit.get(context)
+                                      .newsDetailsModel!
+                                      .content
+                                      .toString(),
+                                  textAlign: TextAlign.right,
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }
           } else {
             return Scaffold(

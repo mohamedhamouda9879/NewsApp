@@ -10,6 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:youngeyes/models/allfav/all.dart';
 import 'package:youngeyes/models/news/newsmodel.dart';
 import 'package:youngeyes/models/topviewed/top.dart';
+import 'package:youngeyes/presentation/components/video/video.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
 Widget defaultButton({
@@ -226,11 +227,102 @@ Widget NewsItem(
                           ),
                         ),
                       ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      errorWidget: (context, url, error) => Center(
+                        child: SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey,
+                            highlightColor: defaultColor,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: defaultColor,
+                              child: Image.asset('assets/images/logo.png'),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                // FadeInImage(
+                //     height: 200,
+                //     placeholder: AssetImage('assets/images/placeholder.png'),
+                //     image: NetworkImage(
+                //         'https://whitecompressor.com/storage/${allNews.post?[index].image}')),
+                const SizedBox(
+                  height: 4,
+                ),
+                SizedBox(
+                  height: 40,
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      FadeAnimatedText('${allNews.post?[index].title}',
+                          textAlign: TextAlign.right,
+                          textStyle: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis)),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  '${allNews.post?[index].content}',
+                  maxLines: 3,
+                  textAlign: TextAlign.right,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(color: Colors.black),
+                ),
+                Container(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    '${allNews.post?[index].createdAt}',
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+Widget NewsItemVideo(
+        {required AllNews allNews,
+        required BuildContext context,
+        required int index,
+        required Function function}) =>
+    GestureDetector(
+      onTap: () {
+        function();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Card(
+          elevation: 13.0,
+          child: Container(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Video.blocProvider(
+                    // Normally you'll get both the url and the aspect ratio from your video meta data
+                    'https://whitecompressor.com/storage/${allNews.post?[index].video}',
+                    aspectRatio: 1.77,
+                    autoPlay: false,
+                    controlsVisible: false),
                 // FadeInImage(
                 //     height: 200,
                 //     placeholder: AssetImage('assets/images/placeholder.png'),

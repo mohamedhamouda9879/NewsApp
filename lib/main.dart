@@ -14,12 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
   await CacheHelper.init();
-  BlocOverrides.runZoned(
-    () {
-      // Use cubits...
-    },
-    blocObserver: MyBlocObserver(),
-  );
+
   Widget widget;
   TOKEN = CacheHelper.getData(key: 'token');
   USERID = CacheHelper.getData(key: 'UserID');
@@ -29,8 +24,13 @@ void main() async {
   } else {
     widget = LoginScreen();
   }
-
-  runApp(MyApp(widget));
+  BlocOverrides.runZoned(
+    () {
+      // Use cubits...
+      runApp(MyApp(widget));
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {

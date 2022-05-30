@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:video_player/video_player.dart';
 import 'package:youngeyes/models/check/check.dart';
 import 'package:youngeyes/models/comments/add.dart';
 import 'package:youngeyes/models/comments/getall.dart';
@@ -11,7 +12,20 @@ import 'package:youngeyes/modules/details/cubit/states.dart';
 import 'package:youngeyes/shared/network/remote/dio_helper.dart';
 
 class NewsDetailsCubit extends Cubit<NewsDetailsStates> {
+  VideoPlayerController? controller;
   NewsDetailsCubit() : super(NewsDetailsInitialState());
+  NewsDetailsCubit.init(
+    String url, {
+    bool autoPlay = true,
+    bool controlsVisible = false,
+  }) : super(NewsDetailsInitialState()) {
+    controller = VideoPlayerController.network('$url')
+      ..initialize().then((_) {
+        controller!.play();
+        controller!.setLooping(true);
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+      });
+  }
 
   static NewsDetailsCubit get(context) => BlocProvider.of(context);
 
@@ -20,6 +34,10 @@ class NewsDetailsCubit extends Cubit<NewsDetailsStates> {
   GetCommentsModel? getCommentsModel;
   FavouriteModel? favouriteModel;
   CheckFavModel? checkFavModel;
+
+  void playVideo() {
+    controller!.dispose();
+  }
 
   void getNewsDetails(String id) async {
     emit(NewsDetailsLoadingState());

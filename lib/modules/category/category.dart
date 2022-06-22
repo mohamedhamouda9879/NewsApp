@@ -13,9 +13,10 @@ import 'package:youngeyes/shared/styles/colors.dart';
 
 class CategoriesScreen extends StatelessWidget {
   final List<String> items = [
-    'https://whitecompressor.com/storage/images/intro_one.jpeg',
-    'https://whitecompressor.com/storage/images/intro_two.jpeg',
-    'https://whitecompressor.com/storage/images/intro_three.jpeg',
+    'https://whitecompressor.com/storage/images/one_o.jpeg',
+    'https://whitecompressor.com/storage/images/two_o.jpeg',
+    'https://whitecompressor.com/storage/images/three_o.jpeg',
+    'https://whitecompressor.com/storage/images/four_o.jpeg',
   ];
 
   @override

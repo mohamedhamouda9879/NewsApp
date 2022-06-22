@@ -43,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                           style: GoogleFonts.abrilFatface(
                               color: Colors.white, fontSize: 45)),
                       Text('0',
+        
                           style: GoogleFonts.abrilFatface(
                               color: Color.fromARGB(255, 17, 3, 137),
                               fontSize: 35)),

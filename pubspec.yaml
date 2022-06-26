@@ -59,6 +59,7 @@ dependencies:
   video_player: ^2.4.2
   loading_animations: ^2.2.0
   carousel_slider: ^4.1.1
+  webview_flutter: ^3.0.2
 
 
 

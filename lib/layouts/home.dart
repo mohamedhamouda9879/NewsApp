@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:youngeyes/layouts/cubit/cubit.dart';
 import 'package:youngeyes/layouts/cubit/states.dart';
 import 'package:youngeyes/modules/category/cubit/cubit.dart';
+import 'package:youngeyes/modules/website/web.dart';
+import 'package:youngeyes/shared/components/components.dart';
 import 'package:youngeyes/shared/styles/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,6 +37,7 @@ class HomeScreen extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(
                 elevation: 0,
+                centerTitle: true,
                 title: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +46,6 @@ class HomeScreen extends StatelessWidget {
                           style: GoogleFonts.abrilFatface(
                               color: Colors.white, fontSize: 45)),
                       Text('0',
-        
                           style: GoogleFonts.abrilFatface(
                               color: Color.fromARGB(255, 17, 3, 137),
                               fontSize: 35)),
@@ -73,6 +75,16 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 backgroundColor: defaultColor,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                        onPressed: (() {
+                          NavigateTo(context, ScreenPay());
+                        }),
+                        icon: Icon(Icons.web_stories)),
+                  ),
+                ],
               ),
               body: cubit.bottomScreens[cubit.currentIndex],
               bottomNavigationBar: CurvedNavigationBar(

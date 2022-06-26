@@ -48,10 +48,10 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.enterp.youngeyes"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 7
-        versionName '1.0.5'
+        versionCode 9
+        versionName '1.0.7'
     }
 
     signingConfigs {
